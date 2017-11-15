@@ -2,6 +2,7 @@
 
 $LimInfCod = 1;
 $LimSupCod = 3;
+$Control = False;
 
 if ($_FILES['Data']["error"] > 0) {
 	echo "Error: " . $_FILES['Data']["error"] . "<br>";
@@ -28,7 +29,9 @@ foreach ($InfoAr as $InfoM) {
 	$InfoCliente = explode(',', $InfoM);
 	$codigo = intval($InfoCliente[3]);
 	if ($codigo < $LimInfCod or $codigo > $LimSupCod) {
-		echo "Formato invalido por codigo de asignacion";
+		$Control = False;
+		break;
+		echo "Invalido";
 	}else{
 		$Control = True;
 	}
@@ -64,19 +67,23 @@ if ($Control) {
 	}
 }
 
-$consulta = $c->query("select * from user");
-$tabla = $c->query("describe user");
+if ($Control == True) {
+	$consulta = $c->query("select * from user");
+	$tabla = $c->query("describe user");
 
-$Datos = $consulta->fetchAll();
-$infotabla = $tabla->fetchAll();
+	$Datos = $consulta->fetchAll();
+	$infotabla = $tabla->fetchAll();
 
-if (count($Datos) > 0) {
-	$filas = count($Datos);
-	$columnas = count($Datos[0])/2;
-}
+	if (count($Datos) > 0) {
+		$filas = count($Datos);
+		$columnas = count($Datos[0])/2;
+	}
 
-for ($i=0; $i < count($infotabla); $i++) {
-	$ColumnName[$i] = $infotabla[$i]["Field"];
+	for ($i=0; $i < count($infotabla); $i++) {
+		$ColumnName[$i] = $infotabla[$i]["Field"];
+	}
+}else{
+	$Datos = NULL;
 }
 
 ?>
@@ -188,7 +195,7 @@ for ($i=0; $i < count($infotabla); $i++) {
 				<?php
 			}else{
 				?>
-				<h2>No hay datos en el formulario <?= $NameForm?></h2>
+				<h1>El documento enviado no es compatible</h1>
 				<?php
 			}
 		?>
