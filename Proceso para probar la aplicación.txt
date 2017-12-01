@@ -1,4 +1,4 @@
-Página web para el procesamiento de archivos .txt
+PÃ¡gina web para el procesamiento de archivos .txt
 
 Instrucciones para crear la base de datos en MySQL:
 
@@ -8,5 +8,5 @@ Instrucciones para crear la base de datos en MySQL:
 	firstname varchar(20), lastname varchar (20), code int NOT NULL);
 
 Luego de tener la base de datos creada solo queda iniciar el servidor, correr el archivo
-llamado form.php y subir los archivos .txt que estan con los nombres valido.txt y
+llamado form.php y subir los archivos .txt que estan con los nombres valido.txt e
 invalido.txt.
